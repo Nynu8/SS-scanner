@@ -1,6 +1,7 @@
 config.json
 client_secret.json
-scans/*
+raw_scans/*
+sheet_scans/*
 
 # Logs
 logs

@@ -75,6 +75,7 @@ module.exports.sniff = (device) => {
                   console.log(chalk`{yellowBright.bold ${solarbody.name}} {blue was already scanned}`)
                 } else {
                   solarSystem.addSolarbody(solarbody);
+                  solarSystem.addRawSolarbody(msg);
                   console.log(chalk`{yellowBright.bold ${solarbody.name}} {blue was added to the list}`)
                 }
               }

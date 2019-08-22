@@ -6,10 +6,15 @@ class SolarSystem {
   constructor(name) {
     this.name = name;
     this.solarbodies = [];
+    this.rawSolarbodies = [];
   }
 
   addSolarbody(solarbody) {
     this.solarbodies.push(solarbody);
+  }
+
+  addRawSolarbody(string) {
+    this.rawSolarbodies.push(string);
   }
 
   numberOfBodies() {
@@ -47,8 +52,10 @@ class SolarSystem {
   async saveToFile() {
     let data = this.getSheetData();
     let dataToSave = data.join('\n');
+    let rawDataToSave = this.rawSolarbodies.join('\n');
     try {
-      await fs.writeFile(`./scans/${this.name}.txt`, dataToSave);
+      await fs.writeFile(`./sheet_scans/${this.name}.txt`, dataToSave);
+      await fs.writeFile(`./raw_scans/${this.name}.txt`, rawDataToSave);
       console.log(chalk`{green Saved {yellowBright ${this.name}} to the file}`);
     }
     catch (e) {
@@ -59,7 +66,7 @@ class SolarSystem {
 
   static async alreadyScanned(name) {
     try {
-      await fs.access(`./scans/${name}.txt`, F_OK);
+      await fs.access(`./sheet_scans/${name}.txt`, F_OK);
       return true;
     }
     catch(e) {
@@ -69,7 +76,7 @@ class SolarSystem {
   
   static async amountScanned(name) {
     try{
-      let data = await fs.readFile(`./scans/${name}.txt`, 'utf-8');
+      let data = await fs.readFile(`./sheet_scans/${name}.txt`, 'utf-8');
       let i = 0;
       data.split(/\r?\n/).forEach(() => {
         i++;
