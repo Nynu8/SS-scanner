@@ -10,6 +10,6 @@ To start scanning simply warp to the system you wish to scan and start scanning.
 
 ## How to compile yourself
 
-If you want to compile this project for yourself (for example for Linux) simply download the project and use **pkg .\package.json** with --targets argument.
+If you want to compile this project for yourself (for example for Linux) simply download the project and use **pkg .\package.json --options no-warnings** with --targets argument.
 
 You'll need to copy **cap.node** from ** _node_modules\cap\build\Release_ ** to the directory with executable for it to work.
