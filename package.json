@@ -1,0 +1,21 @@
+{
+  "name": "ss-scanner",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "pkg": {
+    "assets": [
+      "node_modules/**/*"
+    ]
+  },
+  "bin": "app.js",
+  "author": "Nynu",
+  "license": "ISC",
+  "dependencies": {
+    "cap": "^0.2.1",
+    "chalk": "^2.4.2"
+  }
+}
