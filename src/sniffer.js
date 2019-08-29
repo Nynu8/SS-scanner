@@ -13,7 +13,7 @@ let solarbody = null;
 let systemName;
 
 module.exports.sniff = (device) => {
-  console.log(chalk.bgBlue.greenBright('-----Starting the sniffer-----'));
+  console.log(chalk.bgBlue.greenBright('\n--------Starting the sniffer--------'));
   let capturer = new Cap();
   let filter = 'host 167.114.156.211';
   let bufSize = 10 * 1024 * 1024;
@@ -97,7 +97,7 @@ module.exports.findCorrectInterface = async () => {
   for (let i = 0; i < interfaceCount; i++) {
     for(let j = 0; j < interfaceList[i].addresses.length; j++) {
       let interfaceTested = Cap.deviceList()[i].addresses[j].addr;
-      console.log(chalk`{cyan Testing address {yellowBright.bold ${j}} on interface {yellowBright.bold ${i}}}`);
+      console.log(chalk`{cyan Testing address {yellowBright.bold ${interfaceTested}} on interface {yellowBright.bold ${i}}}`);
       let result = await testInterface(interfaceTested);
       if (result) {
         console.log(chalk.green('Correct address'));

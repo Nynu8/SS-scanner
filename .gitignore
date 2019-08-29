@@ -1,7 +1,7 @@
-config.json
+snifferConfig.json
 client_secret.json
-raw_scans/*
-sheet_scans/*
+raw_scans/
+sheet_scans/
 
 # Logs
 logs

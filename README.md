@@ -4,7 +4,7 @@ A simple and easy to use tool that watches your SS scans of solar bodies and sav
 
 ## How to use
 
-Simply download the **SS-scanner** directory and run **SS-scanner.exe** inside. Program will do it's initial configuration and then the sniffer will start.
+Simply download the **SS-scanner** zip, extract it and run **SS-scanner.exe**. Program will do it's initial configuration and then the sniffer will start.
 
 To start scanning simply warp to the system you wish to scan and start scanning. Program console will tell you everything else you need.
 
