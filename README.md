@@ -1,10 +1,12 @@
 # SS scanner
 
-A simple and easy to use tool that watches your SS scans of solar bodies and saves them in raw and spreadsheet friendly formats 
+A simple and easy to use tool that watches your SS scans of solar bodies and saves them in raw and spreadsheet friendly formats.
 
 ## How to use
 
 Simply download the **SS-scanner** zip, extract it and run **SS-scanner.exe**. Program will do it's initial configuration and then the sniffer will start.
+
+Packet sniffing library (Like [Npcap](https://nmap.org/npcap) for Windows) is required.
 
 To start scanning simply warp to the system you wish to scan and start scanning. Program console will tell you everything else you need.
 
