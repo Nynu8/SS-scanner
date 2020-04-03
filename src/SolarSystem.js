@@ -1,6 +1,6 @@
-const fs = require('fs').promises;
-const chalk = require('chalk');
-const F_OK = require('fs').constants.F_OK;
+const fs = require("fs").promises;
+const chalk = require("chalk");
+const F_OK = require("fs").constants.F_OK;
 
 class SolarSystem {
   constructor(name) {
@@ -22,18 +22,41 @@ class SolarSystem {
   }
 
   alreadyScanned(solarbodyName) {
-    for(const solarbody in this.solarbodies) {
-      if(solarbodyName === this.solarbodies[solarbody].name) {
+    for (const solarbody in this.solarbodies) {
+      if (solarbodyName === this.solarbodies[solarbody].name) {
         return true;
       }
     }
 
     return false;
-  } 
+  }
 
   getSheetData() {
     let num = 2;
-    let data = [['Planet Name', 'Reserved', 'Gravity', 'Temperature', 'Atmosphere', '', '', '', '', 'Suitability', 'Terraforming Mod', 'CA Character', 'Adjusted Suit', 'Slots', 'Metal', 'Nuke', 'Silicon', 'Space Oats', 'Ruins', 'Other']];
+    let data = [
+      [
+        "Planet Name",
+        "Reserved",
+        "Gravity",
+        "Temperature",
+        "Atmosphere",
+        "",
+        "",
+        "",
+        "",
+        "Suitability",
+        "Terraforming Mod",
+        "CA Character",
+        "Adjusted Suit",
+        "Slots",
+        "Metal",
+        "Nuke",
+        "Silicon",
+        "Space Oats",
+        "Ruins",
+        "Other"
+      ]
+    ];
     this.solarbodies.forEach(body => {
       let tmp = body.getSheetArray();
       tmp[5] = `=IF(C${num}="Heavy";0.5;IF(C${num}="Low";0.75;1))`;
@@ -44,22 +67,21 @@ class SolarSystem {
       tmp[12] = `=IF(C${num}="";"";IF((F${num}*G${num}*H${num}*100)*(1+I${num}*0.05)+K${num}>125;125;ROUNDDOWN((F${num}*G${num}*H${num}*100)*(1+I${num}*0.05)+K${num})))`;
       data.push(tmp);
       num++;
-    })
+    });
 
-    return data
+    return data;
   }
 
   async saveToFile() {
     let data = this.getSheetData();
-    let dataToSave = data.join('\n');
-    let rawDataToSave = this.rawSolarbodies.join('\n');
+    let dataToSave = data.join("\n");
+    let rawDataToSave = this.rawSolarbodies.join("\n");
     try {
       await fs.writeFile(`./sheet_scans/${this.name}.txt`, dataToSave);
       await fs.writeFile(`./raw_scans/${this.name}.txt`, rawDataToSave);
       console.log(chalk`{green Saved {yellowBright ${this.name}} to the file}`);
-    }
-    catch (e) {
-      console.log(chalk.red('Failed to save the scan file'));
+    } catch (e) {
+      console.log(chalk.red("Failed to save the scan file"));
       console.log(chalk.red(e.message));
     }
   }
@@ -68,26 +90,24 @@ class SolarSystem {
     try {
       await fs.access(`./sheet_scans/${name}.txt`, F_OK);
       return true;
-    }
-    catch(e) {
+    } catch (e) {
       return false;
     }
   }
-  
+
   static async amountScanned(name) {
-    try{
-      let data = await fs.readFile(`./sheet_scans/${name}.txt`, 'utf-8');
+    try {
+      let data = await fs.readFile(`./sheet_scans/${name}.txt`, "utf-8");
       let i = 0;
       data.split(/\r?\n/).forEach(() => {
         i++;
       });
 
       return i - 1;
-    } catch(e) {
+    } catch (e) {
       return 0;
-    } 
-
-  };
+    }
+  }
 }
 
 module.exports = SolarSystem;
