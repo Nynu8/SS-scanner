@@ -52,16 +52,16 @@ class SolarBody {
       this.metals,
       this.nukes,
       this.silicon,
-      this.spaceOats
+      this.spaceOats,
     ];
     let ruins = "";
-    this.ruins.forEach(ruin => {
+    this.ruins.forEach((ruin) => {
       ruins += ruin + " ";
     });
 
     data.push(ruins);
 
-    this.other.forEach(resource => {
+    this.other.forEach((resource) => {
       data.push(resource);
     });
 

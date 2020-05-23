@@ -48,16 +48,16 @@ class SolarSystem {
         "Terraforming Mod",
         "CA Character",
         "Adjusted Suit",
-        "Slots",
-        "Metal",
-        "Nuke",
-        "Silicon",
-        "Space Oats",
+        '="Slots: "&SUM(N2:N)',
+        '="Metal: "&ArrayFormula(SUM(IFERROR(REGEXEXTRACT(O2:O;"\\d+"))*N2:N))',
+        '="Nuke: "&ArrayFormula(SUM(IFERROR(REGEXEXTRACT(P2:P;"\\d+"))*N2:N))',
+        '="Silicon: "&ArrayFormula(SUM(IFERROR(REGEXEXTRACT(Q2:Q;"\\d+"))*N2:N))',
+        '="Space Oats: "&ArrayFormula(SUM(IFERROR(REGEXEXTRACT(R2:R;"\\d+"))*N2:N))',
         "Ruins",
-        "Other"
-      ]
+        "Other",
+      ],
     ];
-    this.solarbodies.forEach(body => {
+    this.solarbodies.forEach((body) => {
       let tmp = body.getSheetArray();
       tmp[5] = `=IF(C${num}="Heavy";0.5;IF(C${num}="Low";0.75;1))`;
       tmp[6] = `=IF(D${num}="Blistering";0.5;IF(D${num}="Frozen";0.75;1))`;
