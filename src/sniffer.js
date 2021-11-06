@@ -12,7 +12,7 @@ let solarSystem = null;
 let solarbody = null;
 let systemName;
 
-module.exports.sniff = settings => {
+module.exports.sniff = (settings) => {
   console.log(
     chalk.bgBlue.greenBright("\n--------Starting the sniffer--------")
   );
@@ -29,10 +29,6 @@ module.exports.sniff = settings => {
       buffer
     );
     capturer.on("packet", async (nbytes, trunc) => {
-      //console.log('packet: length ' + nbytes + ' bytes, truncated? '
-      //  + (trunc ? 'yes' : 'no'));
-      // raw packet data === buffer.slice(0, nbytes)
-
       if (linkType === "ETHERNET") {
         var ret = decoders.Ethernet(buffer);
         if (ret.info.type === PROTOCOL.ETHERNET.IPV4) {
@@ -157,7 +153,6 @@ module.exports.findCorrectInterface = async () => {
 async function testInterface(interface) {
   const sleep = require("util").promisify(setTimeout);
   let capturer = new Cap();
-  //host 167.114.156.211
   let filter = "";
   let bufSize = 10 * 1024 * 1024;
   let buffer = Buffer.alloc(65535);

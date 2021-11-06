@@ -49,14 +49,16 @@ class SolarSystem {
         "CA Character",
         "Adjusted Suit",
         '="Slots: "&SUM(N2:N)',
-        '="Metal: "&ArrayFormula(SUM(IFERROR(REGEXEXTRACT(O2:O;"\\d+"))*N2:N))',
-        '="Nuke: "&ArrayFormula(SUM(IFERROR(REGEXEXTRACT(P2:P;"\\d+"))*N2:N))',
-        '="Silicon: "&ArrayFormula(SUM(IFERROR(REGEXEXTRACT(Q2:Q;"\\d+"))*N2:N))',
-        '="Space Oats: "&ArrayFormula(SUM(IFERROR(REGEXEXTRACT(R2:R;"\\d+"))*N2:N))',
-        "Ruins",
+        '="Metal: "&ArrayFormula(SUM(O2:O)*N2:N)',
+        '="Nuke: "&ArrayFormula(SUM(P2:P)*N2:N)',
+        '="Silic: "&ArrayFormula(SUM(Q2:Q)*N2:N)',
+        '="Oats: "&ArrayFormula(SUM(R2:R)*N2:N)',
+        '="Baobs: "&ArrayFormula(SUM(S2:S)*N2:N)',
+        "Ruins ",
         "Other",
       ],
     ];
+
     this.solarbodies.forEach((body) => {
       let tmp = body.getSheetArray();
       tmp[5] = `=IF(C${num}="Heavy";0.5;IF(C${num}="Low";0.75;1))`;

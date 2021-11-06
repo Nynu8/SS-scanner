@@ -9,6 +9,7 @@ class SolarBody {
     nukes,
     silicon,
     spaceOats,
+    baobabs,
     ruins,
     other
   ) {
@@ -17,18 +18,11 @@ class SolarBody {
     this.temperature = temperature || "";
     this.atmosphere = atmosphere || "";
     this.baseSlots = baseSlots;
-    metals !== null
-      ? (this.metals = capitalizeFirstLetter(metals))
-      : (this.metals = "");
-    nukes !== null
-      ? (this.nukes = capitalizeFirstLetter(nukes))
-      : (this.nukes = "");
-    silicon !== null
-      ? (this.silicon = capitalizeFirstLetter(silicon))
-      : (this.silicon = "");
-    spaceOats !== null
-      ? (this.spaceOats = capitalizeFirstLetter(spaceOats))
-      : (this.spaceOats = "");
+    this.metals = metals ?? "";
+    this.nukes = nukes ?? "";
+    this.silicon = silicon ?? "";
+    this.spaceOats = spaceOats ?? "";
+    this.baobabs = baobabs ?? "";
     this.ruins = ruins;
     this.other = other;
   }
@@ -53,24 +47,17 @@ class SolarBody {
       this.nukes,
       this.silicon,
       this.spaceOats,
+      this.baobabs,
     ];
-    let ruins = "";
-    this.ruins.forEach((ruin) => {
-      ruins += ruin + " ";
-    });
 
-    data.push(ruins);
+    //ruins
+    data.push(this.ruins.join(" "));
 
-    this.other.forEach((resource) => {
-      data.push(resource);
-    });
+    //other resources
+    data = data.concat(this.other);
 
     return data;
   }
 }
 
 module.exports = SolarBody;
-
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
