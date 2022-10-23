@@ -71,7 +71,7 @@ module.exports.sniff = (settings) => {
                 }
               }
 
-              systemName = msg.split("Entering galaxy ")[1];
+              systemName = msg.split("Entering ")[1].split(".")[0];
               console.log(
                 chalk`{blue Beginning the scan of: {bold.yellowBright ${systemName}}}`
               );

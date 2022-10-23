@@ -16,6 +16,7 @@ readline.question[promisify.custom] = (question) => {
 
 async function readConfigFile() {
   console.log(chalk.blue("Trying to load configuration file"));
+
   try {
     let settings = await fs.readFile("./snifferConfig.json");
     return JSON.parse(settings);
@@ -28,29 +29,36 @@ async function readConfigFile() {
 
 module.exports = async function configurateSettings() {
   let settings = await readConfigFile();
+
   if (settings !== undefined) {
     console.log(chalk.green("Success"));
   } else {
     settings = {};
     console.log(chalk.blue("Generating new settings file"));
+
     let serverAddress = await promisify(readline.question)(
       chalk`{cyan Input Star Sonata server address} {yellow (default liberty.starsonata.com)}\n`
     );
+
     if (serverAddress == "") {
       serverAddress = "liberty.starsonata.com";
     }
+
     settings.serverAddress = serverAddress;
     console.log(chalk`{cyan Saving } {yellow ${serverAddress}}`);
     settings.networkInterface = await interfaceFinder();
+
     if (!settings.networkInterface) {
       console.log(
         chalk.bgRed.yellowBright.bold(
           "Failed to find the correct network adapter. Make sure SS is running and you're logged in!"
         )
       );
+
       await promisify(readline.question)(chalk.cyan("Press enter to exit"));
       process.exit(0);
     }
+
     try {
       fs.writeFile("./snifferConfig.json", JSON.stringify(settings));
       console.log(chalk.green("Configuration saved."));
@@ -60,6 +68,7 @@ module.exports = async function configurateSettings() {
   }
 
   console.log(chalk`{blue Looking for {yellowBright scan} directories}`);
+
   try {
     await fs.mkdir("./raw_scans");
     console.log(

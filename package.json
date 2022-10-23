@@ -4,11 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node --no-warnings app.js"
+    "start": "node --no-warnings app.js",
+    "build": ".\\node_modules\\.bin\\pkg.cmd .\\package.json --target "
   },
   "pkg": {
-    "assets": [
-      "node_modules/**/*"
+    "scripts": "./src/**/*.js",
+    "assets": ["./node_modules/cap/build/Release/cap.node"],
+    "targets": [
+      "node16-win-x64"
     ]
   },
   "bin": "app.js",
@@ -17,5 +20,9 @@
   "dependencies": {
     "cap": "^0.2.1",
     "chalk": "^2.4.2"
+  },
+  "devDependencies": {
+    "pkg": "^5.4.1",
+    "prebuild-install": "^7.1.0"
   }
 }

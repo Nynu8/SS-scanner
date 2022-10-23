@@ -12,22 +12,21 @@ module.exports.parseScan = function (scanString) {
   let atmosphere = scanString.match("(Noxious|Gaseous|Terran)");
   if (atmosphere !== null) atmosphere = atmosphere[1];
 
-  let baseSlots = scanString.match("Base Slots: (\\d)")[1];
+  let baseSlots = scanString.match(/Base Slots: (\d)/)[1];
 
-  let metals = scanString.match("(?:.* of Metals* (([d]+)))");
+  let metals = scanString.match(/(?:.* of Metals* \((\d+)\))/);
   if (metals !== null) metals = metals[1];
 
-  let nukes = scanString.match("(?:.* of Nuclear Waste* ((d+)))");
+  let nukes = scanString.match(/(?:.* of Nuclear Waste* \((\d+)\))/);
   if (nukes !== null) nukes = nukes[1];
 
-  let silicon = scanString.match(`(?:.* of Silicon* \(([d]+)\))`);
-  console.log(silicon);
+  let silicon = scanString.match(/(?:.* of Silicon* \((\d+)\))/);
   if (silicon !== null) silicon = silicon[1];
 
-  let spaceOats = scanString.match("(?:.* of Space Oats* ((d+)))");
+  let spaceOats = scanString.match(/(?:.* of Space Oats* \((\d+)\))/);
   if (spaceOats !== null) spaceOats = spaceOats[1];
 
-  let baobabs = scanString.match("(?:.* of Baobabs* ((d+)))");
+  let baobabs = scanString.match(/(?:.* of Baobabs* \((\d+)\))/);
   if (baobabs !== null) baobabs = baobabs[1];
 
   let ruins = [];
