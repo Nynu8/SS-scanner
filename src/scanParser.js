@@ -14,19 +14,19 @@ module.exports.parseScan = function (scanString) {
 
   let baseSlots = scanString.match(/Base Slots: (\d)/)[1];
 
-  let metals = scanString.match(/(?:.* of Metals* \((\d+)\))/);
+  let metals = scanString.match(/(?:.* of \[\[Metals\]\]* \((\d+)\))/);
   if (metals !== null) metals = metals[1];
 
-  let nukes = scanString.match(/(?:.* of Nuclear Waste* \((\d+)\))/);
+  let nukes = scanString.match(/(?:.* of \[\[Nuclear Waste\]\]* \((\d+)\))/);
   if (nukes !== null) nukes = nukes[1];
 
-  let silicon = scanString.match(/(?:.* of Silicon* \((\d+)\))/);
+  let silicon = scanString.match(/(?:.* of \[\[Silicon\]\]* \((\d+)\))/);
   if (silicon !== null) silicon = silicon[1];
 
-  let spaceOats = scanString.match(/(?:.* of Space Oats* \((\d+)\))/);
+  let spaceOats = scanString.match(/(?:.* of \[\[Space Oats\]\]* \((\d+)\))/);
   if (spaceOats !== null) spaceOats = spaceOats[1];
 
-  let baobabs = scanString.match(/(?:.* of Baobabs* \((\d+)\))/);
+  let baobabs = scanString.match(/(?:.* of \[\[Baobabs\]\]* \((\d+)\))/);
   if (baobabs !== null) baobabs = baobabs[1];
 
   let ruins = [];
@@ -37,9 +37,10 @@ module.exports.parseScan = function (scanString) {
 
   let commods = [];
   regexp =
-    /(?:A )?(?:smidgin|little|A bit|bunch|lot|Plenty|Loads) (?:of )?((?!Metals|Nuclear Waste|Silicon|Space Oats|Baobabs|of)(?:.*?))(?:,|$|\.)/g;
+  /(?:A )?(?:smidgin|little|A bit|bunch|lot|Plenty|Loads) (?:of )?\[\[((?!Metals|Nuclear Waste|Silicon|Space Oats|Baobabs|of)(?:.*?))\]\] (\(\d{1,3}\))(?:,|$|\.)/g
+
   while ((match = regexp.exec(scanString))) {
-    commods.push(match[1]);
+    commods.push(`${match[1]} ${match[2]}`);
   }
 
   return new Solarbody(
