@@ -36,8 +36,18 @@ module.exports.parseScan = function (scanString) {
   }
 
   let commods = [];
+
+  // regular commods
   regexp =
-  /(?:A )?(?:smidgin|little|A bit|bunch|lot|Plenty|Loads) (?:of )?\[\[((?!Metals|Nuclear Waste|Silicon|Space Oats|Baobabs|of)(?:.*?))\]\] (\(\d{1,3}\))(?:,|$|\.)/g
+    /(?:A )?(?:smidgin|little|A bit|bunch|lot|Plenty|Loads) (?:of )\[\[((?!Metals|Nuclear Waste|Silicon|Space Oats|Baobabs|of)(?:.*?))\]\] (\(\d{1,3}\))(?:,|$|\.)/g;
+
+  while ((match = regexp.exec(scanString))) {
+    commods.push(`${match[1]} ${match[2]}`);
+  }
+
+  // colony commods
+  regexp =
+    /(?:A )?(?:smidgin|little|A bit|bunch|lot|Plenty|Loads) (?:of )?(?!\[\[)((?!Metals|Nuclear Waste|Silicon|Space Oats|Baobabs|of)(?:.*?))(?!\]\]) (\(\d{1,3}\))(?:,|$|\.)/g;
 
   while ((match = regexp.exec(scanString))) {
     commods.push(`${match[1]} ${match[2]}`);
